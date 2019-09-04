@@ -1,5 +1,5 @@
 # Create image based on the official Node 10 image from dockerhub
-FROM node:10 as buildContainer
+FROM node:10
 
 # Create a directory where our app will be placed
 RUN mkdir -p /app
@@ -8,7 +8,7 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Copy dependency definitions
-COPY ./package.json ./package-lock.json /app/
+COPY ./package.json /app/
 
 # Install dependecies
 RUN npm install

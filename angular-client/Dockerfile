@@ -10,7 +10,7 @@ WORKDIR /app
 # Copy dependency definitions
 COPY package*.json /app/
 
-RUN npm cache clean
+RUN npm cache verify
 # Install dependecies
 RUN npm install
 

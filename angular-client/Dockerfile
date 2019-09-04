@@ -1,11 +1,22 @@
-# Create image based on the official Node 10 image from dockerhub
-FROM node:10
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-RUN npm cache verify
+FROM node:10-alpine as buildContainer
+WORKDIR /app
+COPY ./package.json ./package-lock.json /app/
 RUN npm install
-COPY . /usr/src/app
+COPY . /app
+RUN npm run build
+
+FROM node:10-alpine
+
+WORKDIR /app
+# Copy dependency definitions
+COPY --from=buildContainer /app/package.json /app
+COPY --from=buildContainer /app/server.js /app
+
+# Get all the code needed to run the app
+COPY --from=buildContainer /app/dist /app/dist
+
+# Expose the port the app runs in
 EXPOSE 4200
-CMD ["npm","start"]
+
+# Serve the app
+CMD ["npm", "run", "server"]

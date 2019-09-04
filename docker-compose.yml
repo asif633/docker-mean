@@ -9,14 +9,14 @@ services:
     volumes:
       - ./angular-client:/app # this will enable changes made to the angular app reflect in the container
 
+  database: # name of the third service
+    image: mongo # specify image to build container from
+    ports:
+      - "27017:27017" # specify port forewarding
+
   express: #name of the second service
     build: express-server # specify the directory of the Dockerfile
     ports:
       - "3000:3000" #specify ports forewarding
     links:
       - database
-
-  database: # name of the third service
-    image: mongo # specify image to build container from
-    ports:
-      - "27017:27017" # specify port forewarding

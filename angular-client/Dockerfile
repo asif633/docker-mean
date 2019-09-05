@@ -3,20 +3,9 @@ WORKDIR /app
 COPY ./package.json /app/
 RUN npm install
 COPY . /app
-RUN npm run build
-
-FROM node:10-alpine
-
-WORKDIR /app
-# Copy dependency definitions
-COPY --from=buildContainer /app/package.json /app
-COPY --from=buildContainer /app/server.js /app
-
-# Get all the code needed to run the app
-COPY --from=buildContainer /app/dist /app/dist
 
 # Expose the port the app runs in
 EXPOSE 4200
 
 # Serve the app
-CMD ["npm", "run", "server"]
+CMD ["npm", "run", "start"]

@@ -4,9 +4,6 @@ version: '2' # specify docker-compose version
 services:
   angular: # name of the first service
     build: angular-client
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
     ports:
       - "4200:4200" # specify port forewarding
 

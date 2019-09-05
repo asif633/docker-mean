@@ -1,4 +1,4 @@
-FROM node:10-alpine as buildContainer
+FROM node:10
 WORKDIR /app
 COPY ./package.json /app/
 COPY . /app

@@ -1,8 +1,8 @@
 FROM node:10
 WORKDIR /app
-COPY ./package.json /app/
-COPY . /app
+COPY package.json /app
 RUN npm install
+COPY . /app
 
 # Expose the port the app runs in
 EXPOSE 4200

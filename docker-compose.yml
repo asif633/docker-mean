@@ -4,7 +4,6 @@ version: '2' # specify docker-compose version
 services:
   angular: # name of the first service
     build: angular-client
-      dockerfile: Dockerfile
     volumes:
       - '.:/app'
       - '/app/node_modules'
